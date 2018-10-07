@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F46DD33D-F0BA-4D04-8D05-9DB682F21AE1}</ProjectGuid>
+    <RootNamespace>Lonelycore</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(ProjectDir)Dependencies\irrKlang\include;$(ProjectDir)Dependencies\FreeType\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Dependencies\GLFW\lib-vc2015;$(ProjectDir)Dependencies\GLEW\lib;$(ProjectDir)Dependencies\irrKlang\lib;$(ProjectDir)Dependencies\FreeType\win32;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(ProjectDir)Dependencies\irrKlang\include;$(ProjectDir)Dependencies\FreeType\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Dependencies\GLFW\lib-vc2015;$(ProjectDir)Dependencies\GLEW\lib;$(ProjectDir)Dependencies\irrKlang\lib;$(ProjectDir)Dependencies\FreeType\win32;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediate\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Content;$(ProjectDir)Source;$(ProjectDir)Source\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>UninitializedLocalUsageCheck</BasicRuntimeChecks>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>NotSet</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <AdditionalIncludeDirectories>$(ProjectDir)Content;$(ProjectDir)Source;$(ProjectDir)Source\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>NotSet</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ExampleGame\Game.cpp" />
+    <ClCompile Include="ExampleGame\main.cpp" />
+    <ClCompile Include="ExampleGame\Objects\Ball.cpp" />
+    <ClCompile Include="ExampleGame\Objects\Paddle.cpp" />
+    <ClCompile Include="Source\App\Input.cpp" />
+    <ClCompile Include="Source\Audio\Sound.cpp" />
+    <ClCompile Include="Source\Audio\SoundManager.cpp" />
+    <ClCompile Include="Source\Debug\Debugger.cpp" />
+    <ClCompile Include="Source\Debug\ImGui\imgui.cpp" />
+    <ClCompile Include="Source\Debug\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="Source\Debug\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="Source\Debug\ImGui\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\Framebuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\RenderBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Camera\Camera.cpp" />
+    <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
+    <ClCompile Include="Source\Graphics\Renderer\Layer.cpp" />
+    <ClCompile Include="Source\Graphics\Renderer\Renderer.cpp" />
+    <ClCompile Include="Source\Graphics\ResourceManager\ResourceManager.cpp" />
+    <ClCompile Include="Source\Graphics\Shader\Shader.cpp" />
+    <ClCompile Include="Source\Graphics\Texture\Texture.cpp" />
+    <ClCompile Include="Source\App\Window.cpp" />
+    <ClCompile Include="Source\Graphics\UI\Button.cpp" />
+    <ClCompile Include="Source\Physics\AABB.cpp" />
+    <ClCompile Include="Source\Physics\CircleCollision.cpp" />
+    <ClCompile Include="Source\Maths\mat4.cpp" />
+    <ClCompile Include="Source\Maths\vec2.cpp" />
+    <ClCompile Include="Source\Maths\vec3.cpp" />
+    <ClCompile Include="Source\Maths\vec4.cpp" />
+    <ClCompile Include="Source\Utils\stb_image\stb_image.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Content\Buffers.h" />
+    <ClInclude Include="Content\Manager.h" />
+    <ClInclude Include="Content\Maths.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\config\ftheader.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\config\ftoption.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\freetype.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftadvanc.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftbbox.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftbdf.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftbitmap.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftbzip2.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftcache.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftchapters.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftcid.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftdriver.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\fterrdef.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\fterrors.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftfntfmt.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftgasp.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftglyph.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftgxval.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftgzip.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftimage.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftincrem.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftlcdfil.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftlist.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftlzw.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftmac.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftmm.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftmodapi.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftmoderr.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftotval.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftoutln.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftparams.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftpfr.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftrender.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftsizes.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftsnames.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftstroke.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftsynth.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftsystem.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\fttrigon.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\fttypes.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ftwinfnt.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\t1tables.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\ttnameid.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\tttables.h" />
+    <ClInclude Include="Dependencies\FreeType\include\freetype\tttags.h" />
+    <ClInclude Include="Dependencies\FreeType\include\ft2build.h" />
+    <ClInclude Include="Dependencies\GLEW\include\GL\eglew.h" />
+    <ClInclude Include="Dependencies\GLEW\include\GL\glew.h" />
+    <ClInclude Include="Dependencies\GLEW\include\GL\glxew.h" />
+    <ClInclude Include="Dependencies\GLEW\include\GL\wglew.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3native.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ESoundEngineOptions.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ESoundOutputDrivers.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_EStreamModes.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_IAudioRecorder.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_IAudioStream.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_IAudioStreamLoader.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_IFileFactory.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_IFileReader.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_IRefCounted.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_irrKlangTypes.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ISound.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ISoundDeviceList.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ISoundEffectControl.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ISoundEngine.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ISoundMixedOutputReceiver.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ISoundSource.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_ISoundStopEventReceiver.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_IVirtualRefCounted.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_SAudioStreamFormat.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\ik_vec3d.h" />
+    <ClInclude Include="Dependencies\irrKlang\include\irrKlang.h" />
+    <ClInclude Include="Dependencies\YSE\include\channel\channel.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\channel\channelInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\classes.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\device\device.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\device\deviceInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\device\deviceSetup.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\ADSRenvelope.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\buffer.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\delay.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\drawableBuffer.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\dspObject.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\envelope.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\fileBuffer.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\filters.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\fourier\fft.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\interpolate4.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\lfo.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\math.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\delay\basicDelay.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\delay\highpassDelay.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\delay\lowpassDelay.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\filters\bandpass.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\filters\highpass.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\filters\lowpass.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\filters\sweep.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\fm\difference.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\granulator.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\hilbert.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\phaser.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\ringModulator.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\modules\sineWave.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\oscillators.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\ramp.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\rawFilters.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\sample_functions.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\dsp\wavetable.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\headers\constants.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\headers\defines.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\headers\enums.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\headers\types.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\io.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\listener.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\log.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\midi\midifile.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\music\chord.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\music\motif\motif.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\music\motif\motifInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\music\note.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\music\pNote.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\music\scale\scale.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\music\scale\scaleInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\player\player.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\player\playerInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\reverb\reverb.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\reverb\reverbInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\sound\sound.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\sound\soundInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\synth\dspVoice.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\synth\synth.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\synth\synthInterface.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\system.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\utils\atomicOps.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\utils\interpolators.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\utils\lfQueue.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\utils\misc.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\utils\vector.hpp" />
+    <ClInclude Include="Dependencies\YSE\include\yse.hpp" />
+    <ClInclude Include="ExampleGame\Game.h" />
+    <ClInclude Include="ExampleGame\GameObject.h" />
+    <ClInclude Include="ExampleGame\Objects\Ball.h" />
+    <ClInclude Include="ExampleGame\Objects\GameObject.h" />
+    <ClInclude Include="ExampleGame\Objects\Paddle.h" />
+    <ClInclude Include="Source\App\Input.h" />
+    <ClInclude Include="Source\Audio\Sound.h" />
+    <ClInclude Include="Source\Audio\SoundManager.h" />
+    <ClInclude Include="Source\Debug\Debugger.h" />
+    <ClInclude Include="Source\Debug\ImGui\imconfig.h" />
+    <ClInclude Include="Source\Debug\ImGui\imgui.h" />
+    <ClInclude Include="Source\Debug\ImGui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="Source\Debug\ImGui\imgui_internal.h" />
+    <ClInclude Include="Source\Debug\ImGui\stb_rect_pack.h" />
+    <ClInclude Include="Source\Debug\ImGui\stb_textedit.h" />
+    <ClInclude Include="Source\Debug\ImGui\stb_truetype.h" />
+    <ClInclude Include="Source\Graphics\Buffers\Framebuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\RenderBuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Camera\Camera.h" />
+    <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
+    <ClInclude Include="Source\Graphics\Fonts\Text.h" />
+    <ClInclude Include="Source\Graphics\Renderer\Layer.h" />
+    <ClInclude Include="Source\Graphics\Renderer\Renderer.h" />
+    <ClInclude Include="Source\Graphics\Renderer\Sprite.h" />
+    <ClInclude Include="Source\Graphics\ResourceManager\ResourceManager.h" />
+    <ClInclude Include="Source\Graphics\Shader\Shader.h" />
+    <ClInclude Include="Source\Graphics\Texture\Texture.h" />
+    <ClInclude Include="Source\App\Window.h" />
+    <ClInclude Include="Source\Graphics\UI\Button.h" />
+    <ClInclude Include="Source\Physics\AABB.h" />
+    <ClInclude Include="Source\Physics\CircleCollision.h" />
+    <ClInclude Include="Source\Maths\mat4.h" />
+    <ClInclude Include="Source\Maths\vec2.h" />
+    <ClInclude Include="Source\Maths\vec3.h" />
+    <ClInclude Include="Source\Maths\vec4.h" />
+    <ClInclude Include="Source\Utils\FileReader.h" />
+    <ClInclude Include="Source\Utils\stb_image\stb_image.h" />
+    <ClInclude Include="Source\Utils\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dependencies\FreeType\win32\freetype.dll" />
+    <None Include="Dependencies\FreeType\win64\freetype.dll" />
+    <None Include="Dependencies\GLFW\lib-vc2015\glfw3.dll" />
+    <None Include="Dependencies\irrKlang\lib\irrKlang.exp" />
+    <None Include="Dependencies\YSE\lib\libyse32.dll" />
+    <None Include="Dependencies\YSE\lib\libyse32.exp" />
+    <None Include="Dependencies\YSE\lib\libyse64.dll" />
+    <None Include="Dependencies\YSE\lib\libyse64.exp" />
+    <None Include="ExampleGame\Resources\Audio\background.ogg" />
+    <None Include="ExampleGame\Resources\Audio\ball_non-solid.ogg" />
+    <None Include="ExampleGame\Resources\Audio\ball_paddle.ogg" />
+    <None Include="ExampleGame\Resources\Audio\ball_solid.ogg" />
+    <None Include="ExampleGame\Resources\Shaders\sprite.fs" />
+    <None Include="ExampleGame\Resources\Shaders\sprite.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ExampleGame\Resources\Textures\awesomeface.png" />
+    <Image Include="ExampleGame\Resources\Textures\background.jpg" />
+    <Image Include="ExampleGame\Resources\Textures\block.png" />
+    <Image Include="ExampleGame\Resources\Textures\block_solid.png" />
+    <Image Include="ExampleGame\Resources\Textures\paddle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\FreeType\win32\freetype.lib" />
+    <Library Include="Dependencies\FreeType\win64\freetype.lib" />
+    <Library Include="Dependencies\GLEW\lib\glew32.lib" />
+    <Library Include="Dependencies\GLEW\lib\glew32s.lib" />
+    <Library Include="Dependencies\GLFW\lib-vc2015\glfw3.lib" />
+    <Library Include="Dependencies\GLFW\lib-vc2015\glfw3dll.lib" />
+    <Library Include="Dependencies\irrKlang\lib\irrKlang.lib" />
+    <Library Include="Dependencies\YSE\lib\libyse32.lib" />
+    <Library Include="Dependencies\YSE\lib\libyse64.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ExampleGame\Resources\Levels\Four.txt" />
+    <Text Include="ExampleGame\Resources\Levels\One.txt" />
+    <Text Include="ExampleGame\Resources\Levels\Three.txt" />
+    <Text Include="ExampleGame\Resources\Levels\Two.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="ExampleGame\breakout.OGG" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
