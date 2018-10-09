@@ -6,6 +6,7 @@
 using namespace lonely;
 using namespace graphics;
 using namespace maths;
+using namespace physics;
 
 class GameObject : public lonely::graphics::Sprite
 {

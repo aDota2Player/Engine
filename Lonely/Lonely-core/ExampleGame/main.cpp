@@ -27,14 +27,22 @@ int main()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	timer.reset();
+
+	Framebuffer buffer(window.GetWidth(), window.GetHeight(), ResourceManager::LoadShader("framebuffer", "ExampleGame/framebuffer.vs", "ExampleGame/framebuffer.fs"));
+
 	while (!window.Closed())
 	{
 		deltatime.Update();
 		window.Clear();
 
+
 		Breakout.ProcessInput(deltatime.GetDeltaTime());
 		Breakout.Update      (deltatime.GetDeltaTime());
+
+		buffer.Begin();
 		Breakout.Render                              ();
+		buffer.End();
+		buffer.Draw(false);
 
 		window.Update();	
 		
