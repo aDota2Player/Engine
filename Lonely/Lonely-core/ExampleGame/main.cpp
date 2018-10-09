@@ -28,8 +28,6 @@ int main()
 
 	timer.reset();
 
-	Framebuffer buffer(window.GetWidth(), window.GetHeight(), ResourceManager::LoadShader("framebuffer", "ExampleGame/framebuffer.vs", "ExampleGame/framebuffer.fs"));
-
 	while (!window.Closed())
 	{
 		deltatime.Update();
@@ -39,10 +37,7 @@ int main()
 		Breakout.ProcessInput(deltatime.GetDeltaTime());
 		Breakout.Update      (deltatime.GetDeltaTime());
 
-		buffer.Begin();
 		Breakout.Render                              ();
-		buffer.End();
-		buffer.Draw(false);
 
 		window.Update();	
 		
