@@ -3,24 +3,24 @@
 
 #include "Maths.h"
 
-namespace lonely { namespace maths {
+namespace lonely { namespace physics {
 
-		CircleCollision::CircleCollision(float radius, vec2 position) : radius(radius), position() {}
+		CircleCollision::CircleCollision(float radius, maths::vec2 position) : radius(radius), position() {}
 
-		bool CircleCollision::Contains(const vec2& point)
+		bool CircleCollision::Contains(const maths::vec2& point)
 		{
 			return length(center - point) < radius;
 		}
 
 		bool CircleCollision::Intersects(const AABB& other)
 		{
-			vec2 other_half_extents = other.size / 2.0f;
+			maths::vec2 other_half_extents = other.size / 2.0f;
 
-			vec2 other_center(other.position + other_half_extents);
-			vec2 difference = center - other_center;
-			vec2 clamped = clamp(difference, -other_half_extents, other_half_extents);
+			maths::vec2 other_center(other.position + other_half_extents);
+			maths::vec2 difference = center - other_center;
+			maths::vec2 clamped = clamp(difference, -other_half_extents, other_half_extents);
 			
-			vec2 closest = other_center + clamped;
+			maths::vec2 closest = other_center + clamped;
 			difference = closest - center;
 
 			return length(difference) < radius;
@@ -33,13 +33,13 @@ namespace lonely { namespace maths {
 
 		Direction CircleCollision::Collided(const AABB& other)
 		{
-			vec2 other_half_extents = other.size / 2.0f;
+			maths::vec2 other_half_extents = other.size / 2.0f;
 
-			vec2 other_center(other.position + other_half_extents);
-			vec2 difference = center - other_center;
-			vec2 clamped = clamp(difference, -other_half_extents, other_half_extents);
+			maths::vec2 other_center(other.position + other_half_extents);
+			maths::vec2 difference = center - other_center;
+			maths::vec2 clamped = clamp(difference, -other_half_extents, other_half_extents);
 
-			vec2 closest = other_center + clamped;
+			maths::vec2 closest = other_center + clamped;
 			difference = closest - center;
 
 			
@@ -55,7 +55,7 @@ namespace lonely { namespace maths {
 				unsigned int best_match = -1;
 				for (unsigned int i = 1; i < 5; i++)
 				{
-					vec2 norm = difference.Normalize();
+					maths::vec2 norm = difference.Normalize();
 					float dot_product = norm.Dot(compass[i - 1]);
 
 					if (dot_product > max)
@@ -66,11 +66,6 @@ namespace lonely { namespace maths {
 				}
 				return (Direction)best_match;
 			}
-			return NONE;
-		}
-
-		Direction Collided(const CircleCollision& other)
-		{
 			return NONE;
 		}
 
