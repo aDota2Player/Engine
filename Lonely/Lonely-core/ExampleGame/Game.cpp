@@ -10,7 +10,12 @@ Game::Game(Window* window)
 	m_BallVertical = BallVertical::UP;
 }
 
-Game::~Game() {}
+Game::~Game() 
+{
+	delete m_Ball;
+	delete m_Paddle;
+	delete m_Background;
+}
 
 void Game::Init()
 {
