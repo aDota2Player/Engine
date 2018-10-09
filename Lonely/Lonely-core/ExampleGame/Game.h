@@ -38,12 +38,12 @@ using namespace maths;
 #define BALL_INITIAL_VELOCITY_X		100.0f
 #define BALL_INITIAL_VELOCITY_Y 	350.0f
 
-enum GameState { GAME_ACTIVE, GAME_MENU, GAME_WIN };
-enum BallVertical { NONE, UP, DOWN };
-
 class Game
 {
 private:
+	enum GameState { GAME_ACTIVE, GAME_MENU, GAME_WIN };
+	enum BallVertical { NONE, UP, DOWN };
+	
 	GameState m_State;
 	Input m_Controller;
 
