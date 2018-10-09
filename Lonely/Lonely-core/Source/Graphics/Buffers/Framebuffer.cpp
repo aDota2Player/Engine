@@ -64,15 +64,16 @@ namespace lonely {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void Framebuffer::Draw() const
+	void Framebuffer::Draw(bool depth) const
 	{
-		m_Shader.Bind();
+		m_Shader->Bind();
 		m_Texture.Bind();
 		glBindVertexArray(m_VertexArray);
 		
 		glDisable(GL_DEPTH_TEST);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glEnable(GL_DEPTH_TEST);
+		if(depth)
+			glEnable(GL_DEPTH_TEST);
 	}
 
 	void Framebuffer::SetSize(unsigned int screenWidth, unsigned int screenHeight) const
