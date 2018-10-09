@@ -29,7 +29,7 @@ namespace lonely { namespace graphics {
 
 		void Begin() const;
 		void End() const;
-		void Draw() const;
+		void Draw(bool depth = true) const;
 
 		void SetSize(unsigned int screenWidth, unsigned int screenHeight) const;
 
