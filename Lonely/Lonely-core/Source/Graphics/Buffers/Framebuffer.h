@@ -12,27 +12,27 @@
 
 namespace lonely { namespace graphics {
 
-	class Framebuffer
-	{
-	private:
-		unsigned int m_BufferID;
-		RenderBuffer m_RendererBuffer;
-		Texture m_Texture;
-		Shader m_Shader;
-		
-		unsigned int m_VertexArray;
-		unsigned int m_VertexBuffer;
+		class Framebuffer
+		{
+		private:
+			unsigned int m_BufferID;
+			RenderBuffer m_RenderBuffer;
+			Texture m_Texture;
+			Shader* m_Shader;
 
-	public:
-		Framebuffer(unsigned int screenWidth, unsigned int screenHeight, const std::string& vertexPath, const std::string& fragmentPath);
-		~Framebuffer();
+			unsigned int m_VertexArray;
+			unsigned int m_VertexBuffer;
 
-		void Begin() const;
-		void End() const;
-		void Draw(bool depth = true) const;
+		public:
+			Framebuffer(unsigned int screenWidth, unsigned int screenHeight, Shader* shader);
+			~Framebuffer();
 
-		void SetSize(unsigned int screenWidth, unsigned int screenHeight) const;
+			void Begin() const;
+			void End() const;
+			void Draw(bool depth = true) const;
 
-	};
+			void SetSize(unsigned int screenWidth, unsigned int screenHeight) const;
+
+		};
 
 } }
