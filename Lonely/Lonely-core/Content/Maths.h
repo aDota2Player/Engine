@@ -49,4 +49,9 @@ namespace lonely { namespace maths {
 		return vec2(clamp(value.x, min.x, max.x), clamp(value.y, min.y, max.y));
 	}
 
+	inline float random(float min, float max)
+	{
+		return min + (float)(rand()) / ((float)(RAND_MAX / (max - min)));
+	}
+
 } }

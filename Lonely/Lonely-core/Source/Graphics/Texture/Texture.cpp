@@ -1,8 +1,8 @@
 #include "Texture.h"
 
-#include <iostream>
-
 #include <stb_image/stb_image.h>
+
+#include <iostream>
 
 namespace lonely { namespace graphics {
 
@@ -13,7 +13,7 @@ namespace lonely { namespace graphics {
 		int width, height, components;
 
 		stbi_set_flip_vertically_on_load(flip);
-		unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &components, TEXTURE_REQUIRED_COMPONENTS);
+		unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &components, LONELY_TEXTURE_REQUIRED_COMPONENTS);
 		glGenTextures(1, &m_TextureID);
 
 		if (data)
@@ -49,7 +49,7 @@ namespace lonely { namespace graphics {
 		}
 	}
 
-	Texture::Texture(unsigned int screenWidth, unsigned int screenHeight)
+	Texture::Texture(unsigned int screen_width, unsigned int screen_height)
 		: m_TextureID(0), b_SuccessfullLoad(1)
 	{
 		glGenTextures(1, &m_TextureID);
@@ -58,7 +58,7 @@ namespace lonely { namespace graphics {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screenWidth, screenHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screen_width, screen_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -92,14 +92,14 @@ namespace lonely { namespace graphics {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void Texture::SetSize(unsigned int screenWidth, unsigned int screenHeight) const 
+	void Texture::SetSize(unsigned int screen_width, unsigned int screen_height) const
 	{
 		glBindTexture(GL_TEXTURE_2D, m_TextureID);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screenWidth, screenHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screen_width, screen_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

@@ -15,7 +15,6 @@ Game::~Game()
 	delete m_Ball;
 	delete m_Paddle;
 	delete m_Background;
-
 }
 
 void Game::Init()
@@ -29,12 +28,14 @@ void Game::Init()
 
 
 	ResourceManager::LoadShader("sprite", "ExampleGame/Resources/Shaders/sprite.vs", "ExampleGame/Resources/Shaders/sprite.fs");
+	ResourceManager::LoadShader("particle", "ExampleGame/Resources/Shaders/particle.vs", "ExampleGame/Resources/Shaders/particle.fs");
 
 	ResourceManager::LoadTexture("block_solid", "ExampleGame/Resources/Textures/block_solid.png");
 	ResourceManager::LoadTexture("block", "ExampleGame/Resources/Textures/block.png");
 	ResourceManager::LoadTexture("ball", "ExampleGame/Resources/Textures/awesomeface.png", false, GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	ResourceManager::LoadTexture("paddle", "ExampleGame/Resources/Textures/paddle.png");
 	ResourceManager::LoadTexture("background", "ExampleGame/Resources/Textures/background.jpg");
+	ResourceManager::LoadTexture("particle", "ExampleGame/Resources/Textures/particle.png");
 
 	m_Projection = mat4::Orthographic(0.0f, m_Width, m_Height, 0.0f, 1.0f, -1.0f);
 
@@ -48,13 +49,26 @@ void Game::Init()
 					  BALL_INITIAL_VELOCITY_X, BALL_INITIAL_VELOCITY_Y,
 		              ResourceManager::GetTexture("ball"));
 
+	m_ParticleEmitter = new ParticleEmitter(ResourceManager::GetTexture("particle"), ResourceManager::GetShader("particle"), m_Projection,
+		                                    10.5f, 1.2f, 1.0f, 15.0f, -5.0f, 15.0f, -5.0f, 1.8f, 0.6f, 500, 55);
+
+	m_ParticleEmitter->AttachEmitterTo(m_Ball);
+
 	Reset();
 
-	LoadLevel("ExampleGame/Resources/Levels/One.txt", 0);
-	LoadLevel("ExampleGame/Resources/Levels/Two.txt", 1);
+	LoadLevel("ExampleGame/Resources/Levels/One.txt",	0);
+	LoadLevel("ExampleGame/Resources/Levels/Two.txt",	1);
 	LoadLevel("ExampleGame/Resources/Levels/Three.txt", 2);
-	LoadLevel("ExampleGame/Resources/Levels/Four.txt", 3);
+	LoadLevel("ExampleGame/Resources/Levels/Four.txt",	3);
 	m_Level = 0;
+
+	m_PlayerLayer = new Layer(ResourceManager::GetShader("sprite"), m_Projection);
+	m_BackgroundLayer = new Layer(ResourceManager::GetShader("sprite"), m_Projection);
+
+	m_PlayerLayer->Add(m_Ball);
+	m_PlayerLayer->Add(m_Paddle);
+
+	m_BackgroundLayer->Add(m_Background);
 
 	SoundManager::GetSound("background")->Play(true);
 }
@@ -181,13 +195,17 @@ void Game::Update(double deltaTime)
 
 		m_Ball->SetPosition(m_Ball->GetPosition() + maths::vec2(m_Ball->velocity.x, m_Ball->velocity.y) * deltaTime);
 	}
+
+	m_ParticleEmitter->SetVelocity(m_Ball->velocity / 10.0f);
 }
 
-void Game::Render()
+void Game::Render(double deltaTime)
 {
-	m_Levels[m_Level]->Bind();
+	m_BackgroundLayer->Render();
 	m_Levels[m_Level]->Render();
-	m_Levels[m_Level]->UnBind();
+	m_ParticleEmitter->Render(deltaTime);
+	m_PlayerLayer->Render();
+
 }
 
 void Game::Reset()
@@ -203,9 +221,6 @@ void Game::Reset()
 void Game::LoadLevel(std::string level_path, int index)
 {
 	m_Levels[index] = new Layer(ResourceManager::GetShader("sprite"), m_Projection);
-
-	m_Levels[index]->Add(m_Background);
-	m_Levels[index]->Add(m_Paddle);
 
 	std::string file = FileToString(level_path);
 
@@ -276,5 +291,4 @@ void Game::LoadLevel(std::string level_path, int index)
 				ResourceManager::GetTexture("block"), color));
 		}
 	}
-	m_Levels[index]->Add(m_Ball);
 }

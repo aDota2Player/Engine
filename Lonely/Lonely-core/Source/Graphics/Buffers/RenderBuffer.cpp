@@ -1,13 +1,15 @@
 #include "RenderBuffer.h"
 
+#include <GL/glew.h>
+
 namespace lonely { namespace graphics {
 
-	RenderBuffer::RenderBuffer(unsigned int windowWidth, unsigned int windowHeight)
+	RenderBuffer::RenderBuffer(unsigned int window_width, unsigned int window_height)
 		: m_BufferID(0)
 	{
 		glGenRenderbuffers(1, &m_BufferID);
 		glBindRenderbuffer(GL_RENDERBUFFER, m_BufferID);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, windowWidth, windowHeight);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window_width, window_height);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	}
 
@@ -26,10 +28,10 @@ namespace lonely { namespace graphics {
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	}
 
-	void RenderBuffer::SetBufferStorage(unsigned int windowWidth, unsigned int windowHeight) const
+	void RenderBuffer::SetBufferStorage(unsigned int window_width, unsigned int window_height) const
 	{
 		glBindRenderbuffer(GL_RENDERBUFFER, m_BufferID);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, windowWidth, windowHeight);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window_width, window_height);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	}
 

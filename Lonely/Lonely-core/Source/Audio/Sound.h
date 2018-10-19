@@ -1,10 +1,8 @@
 #pragma once
 
-#include "SoundManager.h"
-
-#include <irrKlang.h>
-
 #include <string>
+
+namespace irrklang { class ISoundSource; class ISound; }
 
 namespace lonely { namespace audio {
 

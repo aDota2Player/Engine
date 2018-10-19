@@ -1,12 +1,16 @@
 #include "Layer.h"
 
+#include "../Shader/Shader.h"
+
+#include "Sprite.h"
+
+#include "Maths.h"
+
 namespace lonely { namespace graphics {
 
-	Layer::Layer(Shader* shader, const maths::mat4& projectionMatrix)
-		: m_Shader(shader), m_ProjectionMatrix(projectionMatrix)
+	Layer::Layer(Shader* shader, const maths::mat4& projection_matrix)
+		: m_Shader(shader), m_ProjectionMatrix(projection_matrix)
 	{
-		m_Renderer = new Renderer();
-
 		m_Shader->Bind();
 		m_Shader->SetUniformMat4("u_ProjectionMatrix", m_ProjectionMatrix);
 
@@ -18,23 +22,9 @@ namespace lonely { namespace graphics {
 
 	Layer::~Layer()
 	{
-		delete m_Renderer;
-
 		for (unsigned int i = 0; i < m_Sprites.size(); i++)
 			if(m_Sprites[i])
 				delete m_Sprites[i];
-		
-		ResourceManager::DeleteShader(m_Shader->GetName());
-	}
-
-	void Layer::Bind() const
-	{
-		m_Shader->Bind();
-	}
-
-	void Layer::UnBind() const
-	{
-		m_Shader->UnBind();
 	}
 
 	void Layer::Add(Sprite* sprite)
@@ -47,42 +37,59 @@ namespace lonely { namespace graphics {
 		const auto it = std::find(m_Sprites.begin(), m_Sprites.end(), sprite);
 
 		if (it != m_Sprites.end())
+		{
 			m_Sprites.erase(it);
+			delete sprite;
+		}
 		else
 			std::cout << "[ WARNING ]: Sprite has not found" << std::endl;
 	} 
 
 	void Layer::Render()
 	{
-		m_Renderer->Begin();
+		m_Shader->Bind();
+		m_Renderer.Begin();
 
 		for (const Sprite* sprite : m_Sprites)
 			if(sprite->IsVisible())
-				m_Renderer->Submit(sprite);
+				m_Renderer.Submit(sprite);
 			
-		m_Renderer->End();
-		m_Renderer->Draw();
+		m_Renderer.End();
+		m_Renderer.Draw();
+		m_Shader->UnBind();
 	}
 
-	void Layer::SetProjectionMatrix(const maths::mat4& projectionMatrix)
+	void Layer::Render(const maths::mat4& projection_matrix)
 	{
-		m_Shader->SetUniformMat4("u_ProjectionMatrix", projectionMatrix);
+		m_Shader->Bind();
+		m_Shader->SetUniformMat4("u_ProjectionMatrix", projection_matrix);
+
+		m_Renderer.Begin();
+
+		for (const Sprite* sprite : m_Sprites)
+			if (sprite->IsVisible())
+				m_Renderer.Submit(sprite);
+
+		m_Renderer.End();
+		m_Renderer.Draw();
+		m_Shader->UnBind();
 	}
 
-	void Layer::SetModelMatrix(const maths::mat4& modelMatrix)
+	void Layer::Render(const maths::mat4& projection_matrix, const maths::mat4& view_matrix)
 	{
-		m_Shader->SetUniformMat4("u_ModelMatrix", modelMatrix);
-	}
+		m_Shader->Bind();
+		m_Shader->SetUniformMat4("u_ProjectionMatrix", projection_matrix);
+		m_Shader->SetUniformMat4("u_ViewMatrix", view_matrix);
 
-	void Layer::SetViewMatrix(const maths::mat4& viewMatrix)
-	{
-		m_Shader->SetUniformMat4("u_ViewMatrix", viewMatrix);
-	}
+		m_Renderer.Begin();
 
-	void Layer::SetModelViewMatrix(const maths::mat4& modelMatrix, const maths::mat4& viewMatrix)
-	{
-		m_Shader->SetUniformMat4("u_ModelMatrix", modelMatrix);
-		m_Shader->SetUniformMat4("u_ViewMatrix", viewMatrix);
+		for (const Sprite* sprite : m_Sprites)
+			if (sprite->IsVisible())
+				m_Renderer.Submit(sprite);
+
+		m_Renderer.End();
+		m_Renderer.Draw();
+		m_Shader->UnBind();
 	}
 
 } }

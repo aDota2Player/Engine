@@ -1,15 +1,14 @@
 #pragma once
 
-#include "Maths.h"
-
-#include "Sprite.h"
 #include "Renderer.h"
-
-#include "Graphics/Shader/Shader.h"
+#include "Maths/mat4.h"
 
 #include <vector>
 
 namespace lonely { namespace graphics {
+
+	class Shader;
+	class Sprite;
 
 	class Layer
 	{
@@ -18,15 +17,12 @@ namespace lonely { namespace graphics {
 
 		maths::mat4 m_ProjectionMatrix;
 
-		Renderer* m_Renderer;
+		Renderer m_Renderer;
 		Shader* m_Shader;
 
 	public:
-		Layer(Shader* shader, const maths::mat4& projectionMatrix);
+		Layer(Shader* shader, const maths::mat4& projection_matrix);
 		virtual ~Layer();
-
-		virtual void Bind() const;
-		virtual void UnBind() const;
 
 		/*
 		! WARNING: Once you added a sprite, do not delete the sprite with "delete" keyword.
@@ -36,13 +32,10 @@ namespace lonely { namespace graphics {
 		*/
 		virtual void Add(Sprite* sprite);
 		virtual void Remove(Sprite* sprite);
+
 		virtual void Render();
-
-		virtual void SetProjectionMatrix(const maths::mat4& projectionMatrix);
-		virtual void SetModelMatrix(const maths::mat4& modelMatrix);
-		virtual void SetViewMatrix(const maths::mat4& viewMatrix);
-
-		virtual void SetModelViewMatrix(const maths::mat4& modelMatrix, const maths::mat4& viewMatrix);
+		virtual void Render(const maths::mat4& projection_matrix);
+		virtual void Render(const maths::mat4& projection_matrix, const maths::mat4& view_matrix);
 
 		inline std::vector<Sprite*> GetSprites() { return m_Sprites; }
 	};

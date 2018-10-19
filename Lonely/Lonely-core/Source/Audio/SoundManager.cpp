@@ -1,8 +1,7 @@
 #include "SoundManager.h"
-
 #include "Sound.h"
 
-#include <iostream>
+#include <irrKlang.h>
 
 namespace lonely { namespace audio {
 	

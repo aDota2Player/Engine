@@ -1,12 +1,16 @@
 #pragma once
 
-#include "../Shader/Shader.h"
-#include "../Texture/Texture.h"
-
 #include <map>
 #include <string>
 
+#define GL_LINEAR 0x2601
+#define GL_CLAMP_TO_EDGE 0x812F
+#define GL_NEAREST_MIPMAP_LINEAR 0x2702
+
 namespace lonely { namespace graphics {
+
+	class Texture;
+	class Shader;
 
 	class ResourceManager
 	{
@@ -23,7 +27,9 @@ namespace lonely { namespace graphics {
 		static Texture* GetTexture(const std::string& name);
 		
 
-		static Shader* LoadShader(const std::string& name, const std::string& vertexPath, const std::string& fragmentPath);
+		static Shader* LoadShader(const std::string& name, const std::string& vertex_shader_path, const std::string& fragment_shader_path);
+		static Shader* LoadShader(const std::string& name,
+			      const std::string& vertex_shader_path, const std::string& fragment_shader_path, const std::string& geometry_shader_path);
 		static Shader* GetShader(const std::string& name);
 
 

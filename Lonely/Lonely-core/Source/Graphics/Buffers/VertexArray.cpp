@@ -16,23 +16,41 @@ namespace lonely { namespace graphics {
 	VertexArray::~VertexArray()
 	{
 		glDeleteVertexArrays(1, &m_ArrayID);
+		glDeleteBuffers(1, &m_BufferID);
 	}
 
-	void VertexArray::Bind() const
+	void VertexArray::BufferSubData(const void* data, unsigned int size, unsigned int offset)
+	{
+		glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+	}
+
+	void VertexArray::BindBuffer() const 
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_BufferID);
+	}
+
+	void VertexArray::UnBindBuffer() const
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void VertexArray::BindArray() const
 	{
 		glBindVertexArray(m_ArrayID);
 	}
 
-	void VertexArray::UnBind() const 
+	void VertexArray::UnBindArray() const 
 	{
 		glBindVertexArray(0);
 	}
 
 	void VertexArray::Compile(const VertexBuffer& buffer)
 	{
+		m_BufferID = buffer.m_BufferID;
 		unsigned int offset = 0;
-		buffer.Bind();
-		this->Bind();
+
+		BindBuffer();
+		BindArray();
 		
 		for (unsigned int i = 0; i < m_Elements.size(); i++)
 		{
@@ -43,8 +61,9 @@ namespace lonely { namespace graphics {
 			offset += element.count * SizeOfType(element.type);
 		}
 		
-		this->UnBind();
-		buffer.UnBind();
+		UnBindArray();
+		UnBindBuffer();
+		m_Elements.clear();
 	}
 	
 	unsigned int VertexArray::SizeOfType(unsigned int type) // static private

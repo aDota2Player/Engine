@@ -1,53 +1,41 @@
-
-#define LONLEY_INPUT
-#include "App/Window.h"
-
-#include "Maths.h"
-
 #include "Game.h"
-#include "Timer.h"
 
-#include "Audio/SoundManager.h"
+#include "Timer.h"
+#include "Debug/Debugger.h"
 
 Window window(810, 600, "Lonely-Breakout", 0, false);
-Game Breakout(&window);
-
+Game breakout(&window);
 Timer timer;
-DeltaTimer deltatime;
-
-
-unsigned int frames;
 
 int main()
 {
-	Breakout.Init();
+	breakout.Init();
+	Debugger::Initialize(window.GetWindowPointer(), ImGui::StyleColorsDark, "DebugWindow");
 
-	// todo: make a class to handle OpenGL's blending stuff
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	timer.reset();
-
-	while (!window.Closed())
+	while (!window.isClosed())
 	{
-		deltatime.Update();
+		timer.Update();
 		window.Clear();
 
+		breakout.ProcessInput(timer.DeltaTime());
+		breakout.Update(timer.DeltaTime());
+		breakout.Render(timer.DeltaTime());
 
-		Breakout.ProcessInput(deltatime.GetDeltaTime());
-		Breakout.Update      (deltatime.GetDeltaTime());
-
-		Breakout.Render                              ();
-
-		window.Update();	
-		
-		frames++;
-		if (timer.elapsed() - 1.0f >= 0.0f)
 		{
-			timer.reset();
+			Debugger::Begin();
+			
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / Debugger::GetFramerate(), Debugger::GetFramerate());
+			ImGui::Text("DeltaTime: %f ", timer.DeltaTime());
+			ImGui::Text("ElapsedTime: %f ", timer.ElapsedTime());
 
-			printf("FPS: %d\n", frames);
-			frames = 0;
+			Debugger::Render();
 		}
-	}	
+
+		window.Update();
+	}
+	window.~Window();
+	Debugger::Destroy();
 }

@@ -17,6 +17,7 @@ namespace lonely { namespace graphics {
 	{
 	private:
 		unsigned int m_ArrayID;
+		unsigned int m_BufferID;
 
 		std::vector<Elements> m_Elements;
 		unsigned int m_Stride;
@@ -25,10 +26,15 @@ namespace lonely { namespace graphics {
 		VertexArray();
 		~VertexArray();
 
-		void Bind() const;
-		void UnBind() const;
-
 		void Compile(const VertexBuffer& buffer);
+
+		void BufferSubData(const void* data, unsigned int size, unsigned int offset = 0);
+
+		void BindBuffer() const;
+		void UnBindBuffer() const;
+
+		void BindArray() const;
+		void UnBindArray() const;
 
 		template <typename>
 		void Push(unsigned int count, unsigned int type, unsigned int normalized)
@@ -43,7 +49,7 @@ namespace lonely { namespace graphics {
 			m_Stride += count * sizeof(char);
 		}
 
-		template<>
+		template<>	
 		void Push<short>(unsigned int count, unsigned int type, unsigned int normalized)
 		{
 			m_Elements.push_back({ count, type, normalized });

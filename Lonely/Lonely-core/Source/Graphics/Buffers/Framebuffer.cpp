@@ -1,9 +1,14 @@
 #include "Framebuffer.h"
 
+#include "../Shader/Shader.h"
+
+
+#include <GL/glew.h>
+
 namespace lonely { namespace graphics {
 
-		Framebuffer::Framebuffer(unsigned int screenWidth, unsigned int screenHeight, Shader* shader)
-			: m_Texture(screenWidth, screenHeight), m_RenderBuffer(screenWidth, screenHeight), m_Shader(shader)
+		Framebuffer::Framebuffer(unsigned int screen_width, unsigned int screen_height, Shader* shader)
+			: m_Texture(screen_width, screen_height), m_RenderBuffer(screen_width, screen_height), m_Shader(shader)
 		{
 			glGenFramebuffers(1, &m_BufferID);
 			glBindFramebuffer(GL_FRAMEBUFFER, m_BufferID);
@@ -16,33 +21,25 @@ namespace lonely { namespace graphics {
 
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-
 			float vertices[] = {
-				-1.0f,  1.0f,  0.0f, 1.0f,
-				-1.0f, -1.0f,  0.0f, 0.0f,
+			   -1.0f,  1.0f,  0.0f, 1.0f,
+			   -1.0f, -1.0f,  0.0f, 0.0f,
 				1.0f, -1.0f,  1.0f, 0.0f,
 
-				-1.0f,  1.0f,  0.0f, 1.0f,
+			   -1.0f,  1.0f,  0.0f, 1.0f,
 				1.0f, -1.0f,  1.0f, 0.0f,
 				1.0f,  1.0f,  1.0f, 1.0f
 			};
 
-			glGenVertexArrays(1, &m_VertexArray);
-			glGenBuffers(1, &m_VertexBuffer);
+			VertexBuffer vertexBuffer;
+			vertexBuffer.Compile(vertices, sizeof(vertices), GL_STATIC_DRAW);
 
-			glBindVertexArray(m_VertexArray);
-			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+			m_VertexArray.BindArray();
+			m_VertexArray.Push<float>(2, GL_FLOAT, GL_FALSE);
+			m_VertexArray.Push<float>(2, GL_FLOAT, GL_FALSE);
+			m_VertexArray.Compile(vertexBuffer);
 
-
-			glBufferData(GL_ARRAY_BUFFER, 4 * 6 * sizeof(float), vertices, GL_STATIC_DRAW);
-
-			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(2 * sizeof(float)));
-			glEnableVertexAttribArray(0);
-			glEnableVertexAttribArray(1);
-
-			glBindVertexArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			m_VertexArray.UnBindArray();
 		}
 
 		Framebuffer::~Framebuffer()
@@ -65,7 +62,7 @@ namespace lonely { namespace graphics {
 		{
 			m_Shader->Bind();
 			m_Texture.Bind();
-			glBindVertexArray(m_VertexArray);
+			m_VertexArray.BindArray();
 
 			glDisable(GL_DEPTH_TEST);
 			glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -73,10 +70,10 @@ namespace lonely { namespace graphics {
 				glEnable(GL_DEPTH_TEST);
 		}
 
-		void Framebuffer::SetSize(unsigned int screenWidth, unsigned int screenHeight) const
+		void Framebuffer::SetSize(unsigned int screen_width, unsigned int screen_height) const
 		{
-			m_RenderBuffer.SetBufferStorage(screenWidth, screenHeight);
-			m_Texture.SetSize(screenWidth, screenHeight);
+			m_RenderBuffer.SetBufferStorage(screen_width, screen_height);
+			m_Texture.SetSize(screen_width, screen_height);
 		}
 
 } }

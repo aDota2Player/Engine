@@ -17,8 +17,6 @@ public:
 	
 	Ball(float x, float y, float radius, float velocity_x, float velocity_y, Texture* texture);
 	
-	inline const maths::vec2& GetVelocity() {}
-
 	inline void SetPosition(const maths::vec2& position) override { m_Position = position; collision.SetPosition(position); }
 	inline void SetX(float x) override { m_Position.x = x; collision.SetX(x); }
 	inline void SetY(float y) override { m_Position.y = y; collision.SetY(y); }

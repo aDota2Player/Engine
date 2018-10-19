@@ -1,4 +1,7 @@
 #include "Window.h"
+#include "App/Input.h"
+
+#include "Graphics/Buffers/Framebuffer.h"
 
 #include "Debug/ImGui/imgui.h"
 #include "Debug/ImGui/imgui_impl_glfw_gl3.h"
@@ -15,11 +18,11 @@ namespace lonely { namespace app {
 			std::cout << "[ ERROR ]: Failed to initialize game" << std::endl;
 	}
 
-	Window::Window(unsigned int width, unsigned int height, char* title, unsigned int glfwSamples /* = 0 */, bool fullScreen /* = false */)
+	Window::Window(unsigned int width, unsigned int height, char* title, unsigned int glfw_samples /* = 0 */, bool full_screen /* = false */)
 		: m_Width(width), m_Height(height), m_Title(title),
-		  b_FullScreen(fullScreen)
+		  b_FullScreen(full_screen)
 	{
-		if (!Initialize(glfwSamples))
+		if (!Initialize(glfw_samples))
 			std::cout << "[ ERROR ]: Failed to initialize game" << std::endl;
 	}
 
@@ -82,11 +85,6 @@ namespace lonely { namespace app {
 	{
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
-	}
-
-	void Window::InitializeImGui(bool install_callbacks /* = false */)
-	{
-		ImGui_ImplGlfwGL3_Init(m_Window, install_callbacks);
 	}
 
 	// Callbacks

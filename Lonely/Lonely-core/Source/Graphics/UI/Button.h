@@ -1,12 +1,6 @@
 #pragma once
 
-#include "Graphics/Texture/Texture.h"
 #include "Graphics/Renderer/Sprite.h"
-#include "Maths.h"
-
-#include <functional>
-
-#include <iostream>
 
 namespace lonely { namespace graphics {
 
@@ -22,7 +16,8 @@ namespace lonely { namespace graphics {
 		ButtonState m_State;
 
 	public:
-		Button(const maths::vec2& position, const maths::vec2& size, Texture* texture, Texture* hoverTex, Texture* pressTex);
+		Button(const maths::vec2& position, const maths::vec2& size,
+			   Texture* texture, Texture* hover_texture, Texture* press_texture);
 		bool Clicked(float xpos, float ypos, bool clicked);
 	};
 

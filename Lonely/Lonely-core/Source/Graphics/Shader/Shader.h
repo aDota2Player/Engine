@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Maths.h"
-
 #include <unordered_map>
 #include <string>
+
+namespace lonely { namespace maths { struct vec2; struct vec3; struct vec4; struct mat4; } }
 
 namespace lonely { namespace graphics {
 
@@ -16,13 +16,13 @@ namespace lonely { namespace graphics {
 
 	public:
 		Shader(const std::string& name,
-			   const std::string& vertexPath,
-               const std::string& fragmentPath);
+			   const std::string& vertex_shader_path,
+               const std::string& fragment_shader_path);
 
 		Shader(const std::string& name,
-			   const std::string& vertexPath,
-			   const std::string& fragmentPath,
-			   const std::string& geometryPath);
+			   const std::string& vertex_shader_path,
+			   const std::string& fragment_shader_path,
+			   const std::string& geometry_shader_path);
 
 		~Shader();
 

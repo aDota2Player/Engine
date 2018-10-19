@@ -11,11 +11,13 @@
 #include "Graphics/ResourceManager/ResourceManager.h"
 #include "Graphics/Renderer/Renderer.h"
 #include "Graphics/Renderer/Layer.h"
+#include "Graphics/Particle/ParticleEmitter.h"
 
 #include "Audio/SoundManager.h"
 #include "Audio/Sound.h"
 
 #include "App/Input.h"
+#include "App/Window.h"
 
 #include "FileReader.h"
 
@@ -40,7 +42,6 @@ using namespace physics;
 #define BALL_INITIAL_VELOCITY_Y 	350.0f
 
 
-
 class Game
 {
 private:
@@ -56,7 +57,11 @@ private:
 	std::map<int, Layer*> m_Levels;
 	unsigned int m_Level;
 
+	Layer* m_PlayerLayer;
+	Layer* m_BackgroundLayer;
+
 	Ball* m_Ball;
+	ParticleEmitter* m_ParticleEmitter;
 	BallVertical m_BallVertical;
 	double m_Motion;
 	
@@ -75,7 +80,7 @@ public:
 
 	void ProcessInput(double deltaTime);
 	void Update(double deltaTime);
-	void Render();
+	void Render(double deltaTime);
 
 private:
 	void LoadLevel(std::string level_path, int index);

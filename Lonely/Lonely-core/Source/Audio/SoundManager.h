@@ -1,9 +1,9 @@
 #pragma once
 
-#include <irrKlang.h>
-
 #include <map>
 #include <string>
+
+namespace irrklang { class ISoundEngine; }
 
 namespace lonely { namespace audio {
 	

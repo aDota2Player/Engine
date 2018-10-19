@@ -2,8 +2,10 @@
 
 namespace lonely { namespace graphics {
 
-	Button::Button(const maths::vec2& position, const maths::vec2& size, Texture* texture, Texture* hoverTex, Texture* pressTex)
-		: Sprite(position, size, texture), m_UnPressedTex(texture), m_HoverTex(hoverTex), m_PressTex(pressTex), m_State(UNPRESSED) {}
+	Button::Button(const maths::vec2& position, const maths::vec2& size,
+		           Texture* texture, Texture* hover_texture, Texture* press_texture)
+		: Sprite(position, size, texture),
+		  m_UnPressedTex(texture), m_HoverTex(hover_texture), m_PressTex(press_texture), m_State(UNPRESSED) {}
 
 	bool Button::Clicked(float xpos, float ypos, bool clicked)
 	{

@@ -1,16 +1,15 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "../Texture/Texture.h"
 
 #include "RenderBuffer.h"
-
-#include "../Texture/Texture.h"
-#include "../Shader/Shader.h"
 
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 
 namespace lonely { namespace graphics {
+
+		class Shader;
 
 		class Framebuffer
 		{
@@ -20,19 +19,17 @@ namespace lonely { namespace graphics {
 			Texture m_Texture;
 			Shader* m_Shader;
 
-			unsigned int m_VertexArray;
-			unsigned int m_VertexBuffer;
+			VertexArray m_VertexArray;
 
 		public:
-			Framebuffer(unsigned int screenWidth, unsigned int screenHeight, Shader* shader);
+			Framebuffer(unsigned int screen_width, unsigned int screen_height, Shader* shader);
 			~Framebuffer();
 
 			void Begin() const;
 			void End() const;
 			void Draw(bool depth = true) const;
 
-			void SetSize(unsigned int screenWidth, unsigned int screenHeight) const;
-
+			void SetSize(unsigned int screen_width, unsigned int screen_height) const;
 		};
 
 } }

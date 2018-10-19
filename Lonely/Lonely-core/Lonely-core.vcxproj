@@ -141,7 +141,6 @@
     <ClCompile Include="ExampleGame\main.cpp" />
     <ClCompile Include="ExampleGame\Objects\Ball.cpp" />
     <ClCompile Include="ExampleGame\Objects\Paddle.cpp" />
-    <ClCompile Include="Source\App\Input.cpp" />
     <ClCompile Include="Source\Audio\Sound.cpp" />
     <ClCompile Include="Source\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\Debug\Debugger.cpp" />
@@ -156,6 +155,8 @@
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Camera\Camera.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
+    <ClCompile Include="Source\Graphics\Particle\ParticleEmitter.cpp" />
+    <ClCompile Include="Source\Graphics\Particle\ParticleRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Renderer\Layer.cpp" />
     <ClCompile Include="Source\Graphics\Renderer\Renderer.cpp" />
     <ClCompile Include="Source\Graphics\ResourceManager\ResourceManager.cpp" />
@@ -173,7 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Content\Buffers.h" />
-    <ClInclude Include="Content\Manager.h" />
+    <ClInclude Include="Content\Managers.h" />
     <ClInclude Include="Content\Maths.h" />
     <ClInclude Include="Dependencies\FreeType\include\freetype\config\ftconfig.h" />
     <ClInclude Include="Dependencies\FreeType\include\freetype\config\ftheader.h" />
@@ -342,6 +343,9 @@
     <ClInclude Include="Source\Graphics\Camera\Camera.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\Fonts\Text.h" />
+    <ClInclude Include="Source\Graphics\Particle\Particle.h" />
+    <ClInclude Include="Source\Graphics\Particle\ParticleEmitter.h" />
+    <ClInclude Include="Source\Graphics\Particle\ParticleRenderer.h" />
     <ClInclude Include="Source\Graphics\Renderer\Layer.h" />
     <ClInclude Include="Source\Graphics\Renderer\Renderer.h" />
     <ClInclude Include="Source\Graphics\Renderer\Sprite.h" />
@@ -373,8 +377,15 @@
     <None Include="ExampleGame\Resources\Audio\ball_non-solid.ogg" />
     <None Include="ExampleGame\Resources\Audio\ball_paddle.ogg" />
     <None Include="ExampleGame\Resources\Audio\ball_solid.ogg" />
+    <None Include="ExampleGame\Resources\Shaders\particle.fs" />
+    <None Include="ExampleGame\Resources\Shaders\particle.vs" />
     <None Include="ExampleGame\Resources\Shaders\sprite.fs" />
     <None Include="ExampleGame\Resources\Shaders\sprite.vs" />
+    <None Include="imgui.ini" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Blur.fs" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Framebuffer.vs" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Grayscale.fs" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Inverse.fs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ExampleGame\Resources\Textures\awesomeface.png" />
@@ -382,6 +393,7 @@
     <Image Include="ExampleGame\Resources\Textures\block.png" />
     <Image Include="ExampleGame\Resources\Textures\block_solid.png" />
     <Image Include="ExampleGame\Resources\Textures\paddle.png" />
+    <Image Include="ExampleGame\Resources\Textures\particle.png" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\FreeType\win32\freetype.lib" />

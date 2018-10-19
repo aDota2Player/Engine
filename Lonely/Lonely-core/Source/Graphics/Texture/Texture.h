@@ -4,7 +4,7 @@
 
 #include <GL/glew.h>
 
-#define TEXTURE_REQUIRED_COMPONENTS 4
+#define LONELY_TEXTURE_REQUIRED_COMPONENTS 4
 
 namespace lonely { namespace graphics {
 
@@ -22,7 +22,7 @@ namespace lonely { namespace graphics {
 			    unsigned int wrap_s     = GL_CLAMP_TO_EDGE, unsigned int wrap_t     = GL_CLAMP_TO_EDGE);
 
 		// Framebuffer Texture
-		Texture(unsigned int screenWidth, unsigned int screenHeight);
+		Texture(unsigned int screen_width, unsigned int screen_height);
 
 		// Font Texture
 		Texture(unsigned int width, unsigned int rows, unsigned char* buffer);
@@ -32,7 +32,7 @@ namespace lonely { namespace graphics {
 		void Bind(unsigned int slot = 0) const;
 		void UnBind() const;
 
-		void SetSize(unsigned int screenWidth, unsigned int screenHeight) const;
+		void SetSize(unsigned int screen_width, unsigned int screen_height) const;
 
 		inline const unsigned int GetID() const { return m_TextureID; }
 		inline bool IsLoaded() const { return b_SuccessfullLoad; }

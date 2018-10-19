@@ -1,5 +1,7 @@
 #include "ResourceManager.h"
 
+#include "../Shader/Shader.h"
+#include "../Texture/Texture.h"
 
 namespace lonely { namespace graphics {
 
@@ -10,7 +12,6 @@ namespace lonely { namespace graphics {
 		unsigned int mag_filter, unsigned int min_filter,
 		unsigned int wrap_s, unsigned int wrap_t)
 	{
-#ifdef _DEBUG
 		if (Textures.find(name) != Textures.end())
 			return Textures[name];
 
@@ -20,9 +21,6 @@ namespace lonely { namespace graphics {
 			return Textures[name] = texture;
 		else
 			return Textures["DEFAULT"];
-#else
-		return Textures[name] = new Texture(path, flip, mag_filter, min_filter, wrap_s, wrap_t);
-#endif
 	}
 
 	Texture* ResourceManager::GetTexture(const std::string& name)
@@ -33,9 +31,15 @@ namespace lonely { namespace graphics {
 			return Textures["DEFAULT"];
 	}
 
-	Shader* ResourceManager::LoadShader(const std::string& name, const std::string& vertexPath, const std::string& fragmentPath)
+	Shader* ResourceManager::LoadShader(const std::string& name, const std::string& vertex_shader_path, const std::string& fragment_shader_path)
 	{
-		return Shaders[name] = new Shader(name, vertexPath, fragmentPath);
+		return Shaders[name] = new Shader(name, vertex_shader_path, fragment_shader_path);
+	}
+
+	Shader* ResourceManager::LoadShader(const std::string& name,
+		const std::string& vertex_shader_path, const std::string& fragment_shader_path, const std::string& geometry_shader_path)
+	{
+		return Shaders[name] = new Shader(name, vertex_shader_path, fragment_shader_path, geometry_shader_path);
 	}
 	
 	Shader* ResourceManager::GetShader(const std::string& name)

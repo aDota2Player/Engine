@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "Maths.h"
 
 #include "FileReader.h"
 
@@ -7,12 +8,12 @@
 namespace lonely { namespace graphics {
 
 	Shader::Shader(const std::string& name,
-				   const std::string& vertexPath,
-				   const std::string& fragmentPath)
+				   const std::string& vertex_shader_path,
+				   const std::string& fragment_shader_path)
 		: m_ShaderID(0), m_Name(name)
 	{
-		std::string vertexSource =   FileToString(vertexPath);
-		std::string fragmentSource = FileToString(fragmentPath);
+		std::string vertexSource =   FileToString(vertex_shader_path);
+		std::string fragmentSource = FileToString(fragment_shader_path);
 		unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexSource);
 		unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentSource);
 	
@@ -42,14 +43,14 @@ namespace lonely { namespace graphics {
 	}
 
 	Shader::Shader(const std::string& name,
-				   const std::string& vertexPath, 
-		           const std::string& fragmentPath,
-		           const std::string& geometryPath)
+				   const std::string& vertex_shader_path, 
+		           const std::string& fragment_shader_path,
+		           const std::string& geometry_shader_path)
 		: m_ShaderID(0), m_Name(name)
 	{
-		std::string vertexSource =   FileToString(vertexPath);
-		std::string fragmentSource = FileToString(fragmentPath);	
-		std::string geometrySource = FileToString(geometryPath);
+		std::string vertexSource =   FileToString(vertex_shader_path);
+		std::string fragmentSource = FileToString(fragment_shader_path);	
+		std::string geometrySource = FileToString(geometry_shader_path);
 
 		unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexSource);
 		unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentSource);

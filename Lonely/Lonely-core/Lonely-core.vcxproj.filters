@@ -69,9 +69,6 @@
     <ClCompile Include="Source\Graphics\Buffers\RenderBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\App\Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\App\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -112,6 +109,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Physics\CircleCollision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Particle\ParticleRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Particle\ParticleEmitter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -264,9 +267,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Content\Buffers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Content\Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Debug\Debugger.h">
@@ -677,6 +677,18 @@
     <ClInclude Include="Dependencies\YSE\include\yse.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\Particle\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Particle\ParticleRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\Managers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Particle\ParticleEmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dependencies\irrKlang\lib\irrKlang.exp" />
@@ -693,6 +705,13 @@
     <None Include="ExampleGame\Resources\Audio\ball_non-solid.ogg" />
     <None Include="ExampleGame\Resources\Audio\ball_paddle.ogg" />
     <None Include="ExampleGame\Resources\Audio\ball_solid.ogg" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Framebuffer.vs" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Inverse.fs" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Blur.fs" />
+    <None Include="Source\Graphics\Shader\Framebuffers\Grayscale.fs" />
+    <None Include="ExampleGame\Resources\Shaders\particle.fs" />
+    <None Include="ExampleGame\Resources\Shaders\particle.vs" />
+    <None Include="imgui.ini" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ExampleGame\Resources\Textures\awesomeface.png">
@@ -708,6 +727,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ExampleGame\Resources\Textures\background.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ExampleGame\Resources\Textures\particle.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

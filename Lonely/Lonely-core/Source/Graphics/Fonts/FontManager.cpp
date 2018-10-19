@@ -10,20 +10,20 @@ namespace lonely { namespace graphics {
 	std::map<std::string, std::map<char, Character>> FontManager::Fonts;
 
 	Shader*       FontManager::FontShader;
-	VertexArray*  FontManager::vertexArray;
-	VertexBuffer* FontManager::vertexBuffer;
+	VertexArray  FontManager::vertexArray;
 
 	void FontManager::Initialize(Shader* shader, const maths::mat4& projection)
 	{	
 		FontShader = shader;
 		FontShader->Bind();
 		FontShader->SetUniformMat4("u_ProjectionMatrix", projection);
-		vertexArray  = new VertexArray;
-		vertexBuffer = new VertexBuffer(NULL, 6 * 4 * sizeof(float), GL_DYNAMIC_DRAW);
 
-		vertexArray->Push<float>(2, GL_FLOAT, GL_FALSE);
-		vertexArray->Push<float>(2, GL_FLOAT, GL_FALSE);
-		vertexArray->Compile(*vertexBuffer);
+		VertexBuffer vertexBuffer;
+		vertexBuffer.Compile(NULL, 6 * 4 * sizeof(float), GL_DYNAMIC_DRAW);
+
+		vertexArray.Push<float>(2, GL_FLOAT, GL_FALSE);
+		vertexArray.Push<float>(2, GL_FLOAT, GL_FALSE);
+		vertexArray.Compile(vertexBuffer);
 	}
 
 	void FontManager::AddFont(std::string name, std::string path, unsigned int height, unsigned int width)
@@ -37,7 +37,7 @@ namespace lonely { namespace graphics {
 		float width = 0.0f;
 
 		FontShader->Bind();
-		vertexArray->Bind();
+		vertexArray.BindArray();
 		FontShader->SetUniform3f("u_TextColor", color);
 
 		if (centered)
@@ -73,15 +73,15 @@ namespace lonely { namespace graphics {
 
 			ch.texture->Bind();
 
-			vertexBuffer->Bind();
-			vertexBuffer->SubData(vertices, sizeof(vertices));
-			vertexBuffer->UnBind();
+			vertexArray.BindBuffer();
+			vertexArray.BufferSubData(vertices, sizeof(vertices));
+			vertexArray.UnBindBuffer();
 
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 
 			x += (ch.advance >> 6) * scale;
 		}
-		vertexArray->UnBind();
+		vertexArray.UnBindArray();
 		glBindTexture(GL_TEXTURE_2D, 0);
 		FontShader->UnBind();
 	}

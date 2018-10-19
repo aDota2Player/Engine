@@ -57,7 +57,7 @@ namespace lonely { namespace graphics {
 
 		inline void SetSpeed(double speed) { m_Speed = speed; }
 
-		void ProcessKeyboard(CameraMovement dir, double deltaTime);
+		void Move(CameraMovement dir, double deltaTime);
 
 	private:
 		inline void UpdateViewMatrix() { m_ViewMatrix = maths::mat4::LookAt(m_Position, m_Position + m_Front, m_Up); }

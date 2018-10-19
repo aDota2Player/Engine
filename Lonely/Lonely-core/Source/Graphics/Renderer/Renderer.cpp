@@ -1,19 +1,15 @@
 #include "Renderer.h"
+#include "Sprite.h"
+
+#include "../Buffers/VertexBuffer.h"
 
 #include <GL/glew.h>
 
 namespace lonely { namespace graphics {
 
-	Renderer::Renderer()
-		: m_IndexCount(0), m_VertexBuffer(NULL, RENDERER_BUFFER_SIZE, GL_DYNAMIC_DRAW)
-	{
-		Initialize();
-	}
+	Renderer::Renderer() : m_IndexCount(0) { Initialize(); }
 
-	Renderer::~Renderer()
-	{
-	// 	delete m_Buffer;
-	}
+	Renderer::~Renderer() { delete m_Buffer; }
 
 	void Renderer::Initialize()
 	{
@@ -33,26 +29,30 @@ namespace lonely { namespace graphics {
 			offset += 4;
 		}
 
+		VertexBuffer vertexBuffer;
+		vertexBuffer.Compile(NULL, RENDERER_BUFFER_SIZE, GL_DYNAMIC_DRAW);
+
 		m_VertexArray.Push<float>(2, GL_FLOAT, GL_FALSE); // Position 
 		m_VertexArray.Push<float>(2, GL_FLOAT, GL_FALSE); // Texture coordinates
 		m_VertexArray.Push<float>(1, GL_FLOAT, GL_FALSE); // Texture index
 		m_VertexArray.Push<float>(4, GL_FLOAT, GL_FALSE); // Color
 
-		m_VertexArray.Compile(m_VertexBuffer);
+		m_VertexArray.Compile(vertexBuffer);
 
 		glGenBuffers(1, &EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, RENDERER_INDICES_SIZE, indices, GL_DYNAMIC_DRAW);
 		
 		delete indices;
+		m_VertexArray.UnBindArray();
+		m_VertexArray.UnBindBuffer();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
 	}
 
 
 	void Renderer::Begin()
 	{
-		m_VertexBuffer.Bind();
+		m_VertexArray.BindBuffer();
 		m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 	}
 
@@ -125,7 +125,7 @@ namespace lonely { namespace graphics {
 			glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
 		}
 
-		m_VertexArray.Bind();
+		m_VertexArray.BindArray();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
 		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, NULL);

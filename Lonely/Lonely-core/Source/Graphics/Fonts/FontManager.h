@@ -26,8 +26,7 @@ namespace lonely { namespace graphics {
 	private: 
 		static std::map<std::string, std::map<char, Character>> Fonts;
 		static Shader* FontShader;
-		static VertexArray* vertexArray;
-		static VertexBuffer* vertexBuffer;
+		static VertexArray vertexArray;
 
 	public:
 		static void Initialize(Shader* shader, const maths::mat4& projection);

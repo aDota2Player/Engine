@@ -1,29 +1,25 @@
 #pragma once
 
-#include "Sprite.h"
-
 #include "../Buffers/VertexArray.h"
-#include "../Buffers/VertexBuffer.h"
 
+#ifndef RENDERER_MAX_SPRITES
 #define RENDERER_MAX_SPRITES	50000
+#endif
 #define RENDERER_VERTEX_SIZE	4 * RENDERER_MAX_SPRITES
 #define RENDERER_INDICES_SIZE	6 * RENDERER_MAX_SPRITES
 #define RENDERER_BUFFER_SIZE	RENDERER_VERTEX_SIZE * sizeof(VertexData)
-
-#define VERTEX_POSITION_INDEX	0
-#define VERTEX_TEXCOORD_INDEX	1
-#define VERTEX_TEXID_INDEX		2
-#define VERTEX_COLOR_INDEX		3
 
 #include <vector>
 
 namespace lonely { namespace graphics { 
 
+	class Sprite;
+	struct VertexData;
+
 	class Renderer
 	{
 	private:
 		VertexData* m_Buffer;
-		VertexBuffer m_VertexBuffer;
 		VertexArray m_VertexArray;
 
 		unsigned int EBO;

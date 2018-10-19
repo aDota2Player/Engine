@@ -3,16 +3,17 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "App/Input.h"
-
-#include "Graphics/Buffers/Framebuffer.h"
-
 
 #define LONELY_DEFAULT_WINDOW_WIDTH		800
 #define LONELY_DEFAULT_WINDOW_HEIGHT	600
 #define LONELY_DEFAULT_WINDOW_TITLE    "Lonely"
 
+
+namespace lonely { namespace graphics { class Framebuffer; } }
+
 namespace lonely { namespace app {
+
+	class Input;
 
 	class Window
 	{
@@ -31,7 +32,7 @@ namespace lonely { namespace app {
 
 	public:
 		Window();
-		Window(unsigned int width, unsigned int height, char* title, unsigned int glfwSamples = 0, bool fullScreen = false);
+		Window(unsigned int width, unsigned int height, char* title, unsigned int glfw_samples = 0, bool full_screen = false);
 		
 	    ~Window();
 	
@@ -39,9 +40,9 @@ namespace lonely { namespace app {
 		void ClearColor(float r, float g, float b);
 		void Update();
 
-		void InitializeImGui(bool install_callbacks = false);
-
 		// Setters
+		// ----------------------------------------------------------------------------
+		
 		inline void Close() { glfwSetWindowShouldClose(m_Window, true); }
 		
 		inline void AttachController(Input* input) { m_Controller = input; }
@@ -55,11 +56,12 @@ namespace lonely { namespace app {
 		// Window
 		inline unsigned int GetWidth () const {                   return m_Width ;                   }
 		inline unsigned int GetHeight() const {                   return m_Height;                   }
-		inline bool	        Closed   () const { return glfwWindowShouldClose(m_Window) == GLFW_TRUE; }
+		inline bool	        isClosed () const { return glfwWindowShouldClose(m_Window) == GLFW_TRUE; }
 		
 		inline char*        GetTitle() const  {                   return m_Title ;                   }
 
-		inline graphics::Framebuffer* GetFramebuffer()  { return m_Framebuffer; }
+		inline			 GLFWwindow * GetWindowPointer()  { return m_Window;      }
+		inline graphics::Framebuffer* GetFramebuffer  ()  { return m_Framebuffer; }
 
 	private:
 		bool Initialize(unsigned int samples); // Called in constructor

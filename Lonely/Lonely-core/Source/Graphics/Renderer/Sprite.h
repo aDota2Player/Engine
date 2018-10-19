@@ -2,18 +2,19 @@
 
 #include "Maths.h"
 
-#include "../ResourceManager/ResourceManager.h" // + Texture
+#include "../ResourceManager/ResourceManager.h"
+#include "../Texture/Texture.h"
 
-#ifndef SPRITE_DEFAULTS
-#define SPRITE_DEFAULTS
+#ifndef LONELY_SPRITE_DEFAULTS
+#define LONELY_SPRITE_DEFAULTS
 
-#define DEFAULT_SPRITE_POSITION_X	0.0f
-#define DEFAULT_SPRITE_POSITION_Y	0.0f
-#define DEFAULT_SPRITE_SIZE_X		10.0f
-#define DEFAULT_SPRITE_SIZE_Y		10.0f
+#define LONELY_DEFAULT_SPRITE_POSITION_X	0.0f
+#define LONELY_DEFAULT_SPRITE_POSITION_Y	0.0f
+#define LONELY_DEFAULT_SPRITE_SIZE_X		10.0f
+#define LONELY_DEFAULT_SPRITE_SIZE_Y		10.0f
 
-#define DEFAULT_SPRITE_COLOR		1.0f
-#endif // SPRITE_DEFAULTS
+#define LONELY_DEFAULT_SPRITE_COLOR			1.0f
+#endif /* LONELY_SPRITE_DEFAULTS */
 
 namespace lonely { namespace graphics {
 
@@ -38,10 +39,10 @@ namespace lonely { namespace graphics {
 	
 	public:
 		Sprite(
-			const maths::vec2& position = maths::vec2(DEFAULT_SPRITE_POSITION_X, DEFAULT_SPRITE_POSITION_Y), 
-			const maths::vec2& size     = maths::vec2(DEFAULT_SPRITE_SIZE_X    ,     DEFAULT_SPRITE_SIZE_Y),
+			const maths::vec2& position = maths::vec2(LONELY_DEFAULT_SPRITE_POSITION_X, LONELY_DEFAULT_SPRITE_POSITION_Y), 
+			const maths::vec2& size     = maths::vec2(LONELY_DEFAULT_SPRITE_SIZE_X    ,     LONELY_DEFAULT_SPRITE_SIZE_Y),
 			Texture* texture = ResourceManager::GetTexture("DEFAULT"), 
-			const maths::vec4& color    = maths::vec4(                DEFAULT_SPRITE_COLOR                ))
+			const maths::vec4& color    = maths::vec4(                LONELY_DEFAULT_SPRITE_COLOR                ))
 			: m_Position(position), m_Size(size), m_Color(color), m_Texture(texture), b_Visible(true) {}
 
 		virtual ~Sprite() {}

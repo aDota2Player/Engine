@@ -9,7 +9,7 @@ namespace lonely { namespace graphics {
 		m_ViewMatrix = maths::mat4::LookAt(position, position + front, up);
 	}
 
-	void Camera::ProcessKeyboard(CameraMovement dir, double deltaTime)
+	void Camera::Move(CameraMovement dir, double deltaTime)
 	{
 		double velocity = m_Speed * deltaTime;
 

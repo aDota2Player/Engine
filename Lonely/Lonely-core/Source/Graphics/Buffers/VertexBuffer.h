@@ -4,21 +4,18 @@
 
 namespace lonely { namespace graphics {
 
+	class VertexArray;
+
 	class VertexBuffer
 	{
 	private:
+		friend VertexArray;
 		unsigned int m_BufferID;
 
 	public:
-		VertexBuffer(const void* data, unsigned int size, unsigned int usage = GL_STATIC_DRAW);
-		~VertexBuffer();
+		VertexBuffer();
 
-		void SubData(const void* data, unsigned int size, unsigned int offset = 0);
-
-
-		void Bind() const;
-		void UnBind() const;
-
+		void Compile(const void* data, unsigned int size, unsigned int usage = GL_STATIC_DRAW);
 	};
 
 } }
